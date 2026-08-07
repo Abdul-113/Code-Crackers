@@ -4,6 +4,7 @@ import time
 import logging
 import urllib.request
 import urllib.parse
+import urllib.error
 from typing import Dict, Any, List, Optional
 from pathlib import Path
 from dotenv import load_dotenv
@@ -159,8 +160,16 @@ class GSTService:
                                 "gstin": clean_gst,
                                 "source": "LIVE_API"
                             }
-                except Exception as e:
+                except urllib.error.HTTPError as e:
                     self._token = None  # Force re-authentication on next cycle
+                    err_body = ""
+                    try:
+                        err_body = e.read().decode("utf-8")
+                    except Exception:
+                        pass
+                    logger.warning(f"Live verify_gstin HTTP {e.code} on {verify_url}: {err_body or e}. Falling back to cached fixture.")
+                except Exception as e:
+                    self._token = None
                     logger.warning(f"Live verify_gstin failed for {clean_gst} on {verify_url}: {e}. Falling back to cached fixture.")
 
         # Fallback

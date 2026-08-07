@@ -111,8 +111,8 @@ def create_invoice_pdf(output_path, inv_num="AG-2026-AI-8832"):
     <b>Infosys Limited</b><br/>
     Plot No. 44, Electronics City, Hosur Road<br/>
     Bengaluru, Karnataka 560100<br/>
-    <b>GSTIN:</b> 29AAACI1681G1Z0<br/>
-    <b>PAN:</b> AAACI1681G | <b>State:</b> Karnataka (29)
+    <b>GSTIN:</b> 29AAACI4798L1ZU<br/>
+    <b>PAN:</b> AAACI4798L | <b>State:</b> Karnataka (29)
     """
 
     from datetime import timedelta

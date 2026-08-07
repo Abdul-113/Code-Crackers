@@ -1,4 +1,26 @@
 {
+  "29AAACI4798L1ZU": {
+    "taxpayer": {
+      "legalName": "INFOSYS LIMITED",
+      "tradeName": "INFOSYS LIMITED",
+      "status": "Active",
+      "stateName": "Karnataka",
+      "stateCode": "29",
+      "taxpayerType": "Regular",
+      "regStartDate": "01/07/2017",
+      "pan": "AAACI4798L",
+      "gstin": "29AAACI4798L1ZU",
+      "validGstin": true
+    },
+    "returns": [
+      { "rtntype": "GSTR3B", "ret_prd": "032024", "dof": "18-04-2024", "status": "Filed", "arn": "AB290324473243F", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "032024", "dof": "09-04-2024", "status": "Filed", "arn": "AA290324397853X", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "022024", "dof": "19-03-2024", "status": "Filed", "arn": "AB2902243978024", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "022024", "dof": "08-03-2024", "status": "Filed", "arn": "AA2902242770796", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "012024", "dof": "19-02-2024", "status": "Filed", "arn": "AB290124317964A", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "012024", "dof": "09-02-2024", "status": "Filed", "arn": "AA290124471591G", "mof": "ONLINE" }
+    ]
+  },
   "29AAACI1681G1Z0": {
     "taxpayer": {
       "legalName": "INFOSYS LIMITED",
