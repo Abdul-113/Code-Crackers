@@ -93,6 +93,43 @@ Investors fund verified invoices through competitive live auctions, while smart 
 
 ---
 
+## 📊 GST-Backed Credit Scoring Engine (Sandbox.co.in Integration)
+
+Invoice2Credit AI replaces arbitrary credit score mocks with a deterministic, real-time credit score derived directly from the **Goods and Services Tax Network (GSTN)** via **Sandbox.co.in API integration**.
+
+### 🧮 Credit Score Formula Breakdown (0–100 Scale)
+
+The composite buyer credit score is evaluated through a 4-factor weighted risk model:
+
+| Factor | Weight | Evaluation Criteria | Maximum Points |
+| :--- | :--- | :--- | :--- |
+| **Filing Consistency** | **40%** | Ratio of valid filings in the preceding 12-month trailing period vs expected 24 returns (12 GSTR-1 + 12 GSTR-3B). | `40.0 pts` |
+| **Filing Timeliness** | **25%** | Percentage of returns filed on or before statutory due dates (11th of subsequent month for GSTR-1, 20th for GSTR-3B). | `25.0 pts` |
+| **GSTIN Status** | **25%** | Legal registration status: `Active` = 25 pts, `Suspended` = 5 pts, `Cancelled` = 0 pts. | `25.0 pts` |
+| **Business Vintage** | **10%** | Operating history since incorporation date: `≥5 years` = 10 pts, `≥3 years` = 8 pts, `≥1 year` = 6 pts, `<1 year` = 4 pts. | `10.0 pts` |
+
+### 🏷️ Risk Tiers & Recommended Advance Rates
+
+$$\text{Total Score} = \text{Consistency} (40) + \text{Timeliness} (25) + \text{Status} (25) + \text{Vintage} (10)$$
+
+| Score Range | Credit Grade | Risk Classification | Recommended Advance Rate |
+| :---: | :---: | :--- | :---: |
+| **85 – 100** | **AAA** | Prime / Ultra-Low Risk | 90% – 95% |
+| **70 – 84** | **AA** | Strong / Low Risk | 85% – 90% |
+| **55 – 69** | **A** | Moderate / Standard Risk | 75% – 85% |
+| **40 – 54** | **BBB** | Subprime / Elevated Risk | 65% – 75% |
+| **0 – 39** | **C** | High Risk / Critical Review | 50% – 60% |
+
+### 🔒 Consent-Based Data Access & Limitations
+
+1. **Public vs. Private GST Compliance Endpoints**:
+   - The primary verification flow utilizes **Public GSTN Verification** (`/gst/compliance/public/gstin/verify`) and **Public Return Filing Trackers** (`/gst/compliance/public/gstrs/track`). These endpoints query the official GSTN ledger without requiring corporate OTPs.
+   - Granular invoice-by-invoice input tax credit (ITC) reconciliation (e.g. GSTR-2B or GSTR-3B turnover figures) requires taxpayer OTP-based consent as mandated by Indian data protection regulations.
+2. **Offline Fallback Architecture**:
+   - In environments where external sandbox rate limits or network isolation occurs, the system automatically falls back to curated golden fixtures (`gst_fixtures.json`), ensuring zero disruption to demo, evaluation, or hackathon grading.
+
+---
+
 ## 📁 Repository Structure
 
 ```
@@ -217,6 +254,10 @@ FIREBASE_CLIENT_EMAIL=firebase-adminsdk@your-project.iam.gserviceaccount.com
 
 GEMINI_API_KEY=AIzaSy...
 GROQ_API_KEY=gsk_...
+
+GST_API_KEY=key_live_...
+GST_API_SECRET=secret_live_...
+GST_API_BASE_URL=https://api.sandbox.co.in
 
 POLYGON_RPC_URL=https://rpc-amoy.polygon.technology
 PRIVATE_KEY=0x...
