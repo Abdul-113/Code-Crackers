@@ -1,0 +1,132 @@
+{
+  "29AAACI1681G1Z0": {
+    "taxpayer": {
+      "legalName": "INFOSYS LIMITED",
+      "tradeName": "INFOSYS LIMITED",
+      "status": "Active",
+      "stateName": "Karnataka",
+      "stateCode": "29",
+      "taxpayerType": "Regular",
+      "regStartDate": "01/07/2017",
+      "pan": "AAACI1681G",
+      "gstin": "29AAACI1681G1Z0",
+      "validGstin": true
+    },
+    "returns": [
+      { "rtntype": "GSTR3B", "ret_prd": "032024", "dof": "18-04-2024", "status": "Filed", "arn": "AB290324473243F", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "032024", "dof": "09-04-2024", "status": "Filed", "arn": "AA290324397853X", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "022024", "dof": "19-03-2024", "status": "Filed", "arn": "AB2902243978024", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "022024", "dof": "08-03-2024", "status": "Filed", "arn": "AA2902242770796", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "012024", "dof": "19-02-2024", "status": "Filed", "arn": "AB290124317964A", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "012024", "dof": "09-02-2024", "status": "Filed", "arn": "AA290124471591G", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "122023", "dof": "18-01-2024", "status": "Filed", "arn": "AB2912235654285", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "122023", "dof": "09-01-2024", "status": "Filed", "arn": "AA291223467423G", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "112023", "dof": "18-12-2023", "status": "Filed", "arn": "AB2911230859824", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "112023", "dof": "08-12-2023", "status": "Filed", "arn": "AA291123380650L", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "102023", "dof": "19-11-2023", "status": "Filed", "arn": "AB2910235378590", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "102023", "dof": "08-11-2023", "status": "Filed", "arn": "AA291023491652F", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "092023", "dof": "20-10-2023", "status": "Filed", "arn": "AB2909237661409", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "092023", "dof": "10-10-2023", "status": "Filed", "arn": "AA290923636654Z", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "082023", "dof": "19-09-2023", "status": "Filed", "arn": "AB290823487573S", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "082023", "dof": "09-09-2023", "status": "Filed", "arn": "AA290823762188X", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "072023", "dof": "19-08-2023", "status": "Filed", "arn": "AB2907233314775", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "072023", "dof": "10-08-2023", "status": "Filed", "arn": "AA290723731679V", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "062023", "dof": "19-07-2023", "status": "Filed", "arn": "AB290623857949H", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "062023", "dof": "09-07-2023", "status": "Filed", "arn": "AA290623670382A", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "052023", "dof": "19-06-2023", "status": "Filed", "arn": "AB2905235058937", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "052023", "dof": "09-06-2023", "status": "Filed", "arn": "AA290523593992T", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "042023", "dof": "19-05-2023", "status": "Filed", "arn": "AB2904232576538", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "042023", "dof": "09-05-2023", "status": "Filed", "arn": "AA290423799877H", "mof": "ONLINE" }
+    ]
+  },
+  "24ABKCS2033B1ZV": {
+    "taxpayer": {
+      "legalName": "SANDBOX FINANCIAL TECHNOLOGIES PRIVATE LIMITED",
+      "tradeName": "SANDBOX FINTECH",
+      "status": "Active",
+      "stateName": "Gujarat",
+      "stateCode": "24",
+      "taxpayerType": "Regular",
+      "regStartDate": "06/02/2023",
+      "pan": "ABKCS2033B",
+      "gstin": "24ABKCS2033B1ZV",
+      "validGstin": true
+    },
+    "returns": [
+      { "rtntype": "GSTR3B", "ret_prd": "032024", "dof": "18-04-2024", "status": "Filed", "arn": "AB240324473243F", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "032024", "dof": "09-04-2024", "status": "Filed", "arn": "AA240324397853X", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "022024", "dof": "20-03-2024", "status": "Filed", "arn": "AB2402243978024", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "022024", "dof": "06-03-2024", "status": "Filed", "arn": "AA2402242770796", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "012024", "dof": "19-02-2024", "status": "Filed", "arn": "AB240124317964A", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "012024", "dof": "09-02-2024", "status": "Filed", "arn": "AA240124471591G", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "122023", "dof": "18-01-2024", "status": "Filed", "arn": "AB2412235654285", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "122023", "dof": "09-01-2024", "status": "Filed", "arn": "AA241223467423G", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "112023", "dof": "18-12-2023", "status": "Filed", "arn": "AB2411230859824", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "112023", "dof": "08-12-2023", "status": "Filed", "arn": "AA241123380650L", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "102023", "dof": "28-11-2023", "status": "Filed", "arn": "AB2410235378590", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "102023", "dof": "08-11-2023", "status": "Filed", "arn": "AA241023491652F", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "092023", "dof": "20-10-2023", "status": "Filed", "arn": "AB2409237661409", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "092023", "dof": "10-10-2023", "status": "Filed", "arn": "AA240923636654Z", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "082023", "dof": "21-09-2023", "status": "Filed", "arn": "AB240823487573S", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "082023", "dof": "11-09-2023", "status": "Filed", "arn": "AA240823762188X", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "072023", "dof": "19-08-2023", "status": "Filed", "arn": "AB2407233314775", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "072023", "dof": "11-08-2023", "status": "Filed", "arn": "AA240723731679V", "mof": "GSP" },
+      { "rtntype": "GSTR3B", "ret_prd": "062023", "dof": "20-07-2023", "status": "Filed", "arn": "AB240623857949H", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "062023", "dof": "10-07-2023", "status": "Filed", "arn": "AA240623670382A", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "052023", "dof": "20-06-2023", "status": "Filed", "arn": "AB2405235058937", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "052023", "dof": "09-06-2023", "status": "Filed", "arn": "AA240523593992T", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "042023", "dof": "19-05-2023", "status": "Filed", "arn": "AB2404232576538", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "042023", "dof": "11-05-2023", "status": "Filed", "arn": "AA240423799877H", "mof": "ONLINE" }
+    ]
+  },
+  "27AAACG7170L1ZU": {
+    "taxpayer": {
+      "legalName": "TATA CONSULTANCY SERVICES LIMITED",
+      "tradeName": "TCS",
+      "status": "Active",
+      "stateName": "Maharashtra",
+      "stateCode": "27",
+      "taxpayerType": "Regular",
+      "regStartDate": "01/07/2017",
+      "pan": "AAACG7170L",
+      "gstin": "27AAACG7170L1ZU",
+      "validGstin": true
+    },
+    "returns": [
+      { "rtntype": "GSTR3B", "ret_prd": "032024", "dof": "19-04-2024", "status": "Filed", "arn": "AB270324473243F", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "032024", "dof": "09-04-2024", "status": "Filed", "arn": "AA270324397853X", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "022024", "dof": "19-03-2024", "status": "Filed", "arn": "AB2702243978024", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "022024", "dof": "10-03-2024", "status": "Filed", "arn": "AA2702242770796", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "012024", "dof": "18-02-2024", "status": "Filed", "arn": "AB270124317964A", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "012024", "dof": "08-02-2024", "status": "Filed", "arn": "AA270124471591G", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "122023", "dof": "18-01-2024", "status": "Filed", "arn": "AB2712235654285", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "122023", "dof": "09-01-2024", "status": "Filed", "arn": "AA271223467423G", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "112023", "dof": "19-12-2023", "status": "Filed", "arn": "AB2711230859824", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "112023", "dof": "09-12-2023", "status": "Filed", "arn": "AA271123380650L", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "102023", "dof": "19-11-2023", "status": "Filed", "arn": "AB2710235378590", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "102023", "dof": "09-11-2023", "status": "Filed", "arn": "AA271023491652F", "mof": "ONLINE" }
+    ]
+  },
+  "33AAACN8145P1Z8": {
+    "taxpayer": {
+      "legalName": "NEXURA ROBOTICS & AUTONOMOUS SYSTEMS PVT. LTD.",
+      "tradeName": "NEXURA ROBOTICS",
+      "status": "Active",
+      "stateName": "Tamil Nadu",
+      "stateCode": "33",
+      "taxpayerType": "Regular",
+      "regStartDate": "14/05/2021",
+      "pan": "AAACN8145P",
+      "gstin": "33AAACN8145P1Z8",
+      "validGstin": true
+    },
+    "returns": [
+      { "rtntype": "GSTR3B", "ret_prd": "032024", "dof": "20-04-2024", "status": "Filed", "arn": "AB330324473243F", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "032024", "dof": "11-04-2024", "status": "Filed", "arn": "AA330324397853X", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "022024", "dof": "20-03-2024", "status": "Filed", "arn": "AB3302243978024", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "022024", "dof": "11-03-2024", "status": "Filed", "arn": "AA3302242770796", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "012024", "dof": "20-02-2024", "status": "Filed", "arn": "AB330124317964A", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "012024", "dof": "11-02-2024", "status": "Filed", "arn": "AA330124471591G", "mof": "ONLINE" }
+    ]
+  }
+}
