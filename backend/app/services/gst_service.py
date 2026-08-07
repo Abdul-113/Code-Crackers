@@ -88,7 +88,7 @@ class GSTService:
             headers={
                 "x-api-key": self.api_key,
                 "x-api-secret": self.api_secret,
-                "x-api-version": "1.0",
+                "x-api-version": "1.0.0",
                 "Accept": "application/json"
             },
             method="POST"
@@ -130,7 +130,7 @@ class GSTService:
                 headers={
                     "Authorization": token,
                     "x-api-key": self.api_key,
-                    "x-api-version": "1.0",
+                    "x-api-version": "1.0.0",
                     "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
@@ -192,7 +192,7 @@ class GSTService:
                 headers={
                     "Authorization": token,
                     "x-api-key": self.api_key,
-                    "x-api-version": "1.0",
+                    "x-api-version": "1.0.0",
                     "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
