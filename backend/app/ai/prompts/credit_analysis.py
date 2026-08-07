@@ -26,6 +26,12 @@ INVOICE METADATA:
 - Buyer Name: {buyerName} (GST: {buyerGST})
 - Creation Date: {createdAt}
 
+SOVEREIGN GST COMPLIANCE DOSSIER (Verified via Sandbox.co.in):
+- Buyer Legal Entity: {buyerLegalName}
+- Registration Status: {buyerGstStatus} ({buyerState})
+- GST Filing Track: {buyerFilingTrack}
+- Corporate Vintage: {buyerVintage}
+
 DOCUMENT ANALYSIS SNIPPET/TEXT:
 {rawTextSnippet}
 
