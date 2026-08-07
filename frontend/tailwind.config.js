@@ -1,0 +1,100 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50:  '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          950: '#172554',
+        },
+        secondary: {
+          50:  '#faf5ff',
+          100: '#f3e8ff',
+          200: '#e9d5ff',
+          300: '#d8b4fe',
+          400: '#c084fc',
+          500: '#a855f7',
+          600: '#9333ea',
+          700: '#7c3aed',
+          800: '#6d28d9',
+          900: '#581c87',
+          950: '#3b0764',
+        },
+        accent: {
+          50:  '#ecfeff',
+          100: '#cffafe',
+          200: '#a5f3fc',
+          300: '#67e8f9',
+          400: '#22d3ee',
+          500: '#06b6d4',
+          600: '#0891b2',
+          700: '#0e7490',
+          800: '#155e75',
+          900: '#164e63',
+        },
+        success: {
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+        },
+        dark: {
+          bg:     '#0B1120',
+          card:   '#111827',
+          card2:  '#1a2235',
+          border: '#1f2d47',
+          muted:  '#374151',
+        },
+      },
+      fontFamily: {
+        sans:    ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Outfit', 'Inter', 'sans-serif'],
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'grid-pattern':    "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+      },
+      animation: {
+        'float':       'float 6s ease-in-out infinite',
+        'float-slow':  'float 9s ease-in-out infinite',
+        'float-fast':  'float 4s ease-in-out infinite',
+        'pulse-slow':  'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'spin-slow':   'spin 20s linear infinite',
+        'blob':        'blob 7s infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%':      { transform: 'translateY(-20px)' },
+        },
+        blob: {
+          '0%':   { transform: 'translate(0px, 0px) scale(1)' },
+          '33%':  { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%':  { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+        },
+      },
+      boxShadow: {
+        'glow-blue':    '0 0 40px -10px rgba(37, 99, 235, 0.5)',
+        'glow-purple':  '0 0 40px -10px rgba(124, 58, 237, 0.5)',
+        'glow-cyan':    '0 0 40px -10px rgba(6, 182, 212, 0.4)',
+        'card':         '0 4px 24px -4px rgba(0,0,0,0.08)',
+        'card-dark':    '0 4px 24px -4px rgba(0,0,0,0.4)',
+      },
+    },
+  },
+  plugins: [],
+}

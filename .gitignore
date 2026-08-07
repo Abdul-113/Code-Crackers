@@ -1,0 +1,159 @@
+# ─────────────────────────────────────────────
+# SECRETS & CREDENTIALS — NEVER COMMIT THESE
+# ─────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+!*.env.example
+
+# Firebase service account keys
+**/firebase-service-account.json
+!**/firebase-service-account.json.example
+**/serviceAccountKey.json
+**/google-services.json
+**/GoogleService-Info.plist
+
+# Scratch and debug scripts
+create_hackathon_commits.py
+rebuild_commits.py
+backend/firebase_audit.py
+backend/firebase_cleanup.py
+backend/reset_invoice.py
+backend/test_mint_debug.py
+backend/update_buyers.py
+backend/create_tata_motors.py
+backend/create_tech_mahindra.py
+backend/test_regex.py
+backend/scratch_*.py
+backend/scratch_test.py
+
+# Private keys / keystores
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+
+# ─────────────────────────────────────────────
+# NODE / FRONTEND
+# ─────────────────────────────────────────────
+node_modules/
+jspm_packages/
+web_modules/
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Vite
+vite.config.js.timestamp-*
+
+# ─────────────────────────────────────────────
+# PYTHON / BACKEND
+# ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.Python
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+*.egg
+MANIFEST
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# mypy / pyright
+.mypy_cache/
+.pyright/
+
+# ─────────────────────────────────────────────
+# BLOCKCHAIN / HARDHAT
+# ─────────────────────────────────────────────
+artifacts/
+cache/
+typechain/
+typechain-types/
+covhtml/
+.openzeppelin/
+.hardhat/
+
+# Deployed addresses (can contain private info)
+deployments/
+
+# ─────────────────────────────────────────────
+# LOGS & DATABASES
+# ─────────────────────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+logs/
+
+# Databases
+*.sqlite
+*.sqlite3
+sqlite.db
+*.db
+
+# ─────────────────────────────────────────────
+# OS & IDE FILES
+# ─────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# VSCode
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# ─────────────────────────────────────────────
+# MISC
+# ─────────────────────────────────────────────
+*.bak
+*.tmp
+*.temp
+*.swp
+*.orig
+sample_invoice*.html
+
