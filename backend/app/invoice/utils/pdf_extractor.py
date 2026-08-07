@@ -67,8 +67,8 @@ AMOUNT_PATTERNS = [
 ]
 
 TAX_PATTERNS = [
-    re.compile(r'(?:total\s*)?(?:integrated\s*gst|gst|tax|igst|cgst|sgst)\s*(?:amount)?(?:\s*\(\d+%\))?[\s.:\n]*(?:INR|Rs\.?|₹)?[\s]*([\d,]+\.?\d*)', re.I),
-    re.compile(r'(?:cgst|igst|sgst)(?:\s*\(\d+%\))?[\s.:\n]*(?:INR|Rs\.?|₹)?[\s]*([\d,]+\.?\d*)', re.I),
+    re.compile(r'(?:total\s*)?(?:integrated\s*gst|gst|tax|igst|cgst|sgst)\s*(?:amount)?(?:\s*\([@\s\w%]*\))?[\s.:\n]*(?:INR|Rs\.?|₹)?[\s]*([\d,]+\.?\d*)', re.I),
+    re.compile(r'(?:cgst|igst|sgst)(?:\s*\([@\s\w%]*\))?[\s.:\n]*(?:INR|Rs\.?|₹)?[\s]*([\d,]+\.?\d*)', re.I),
 ]
 
 SELLER_PATTERNS = [
