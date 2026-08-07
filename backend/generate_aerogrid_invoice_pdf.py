@@ -115,10 +115,16 @@ def create_invoice_pdf(output_path, inv_num="AG-2026-AI-8832"):
     <b>PAN:</b> AAACI1681G | <b>State:</b> Karnataka (29)
     """
 
+    from datetime import timedelta
+    inv_date_obj = datetime.now() - timedelta(days=5)
+    due_date_obj = datetime.now() + timedelta(days=70)
+    inv_date_str = inv_date_obj.strftime('%d/%m/%Y')
+    due_date_str = due_date_obj.strftime('%d/%m/%Y')
+
     meta_html = f"""
     <b>Invoice No:</b> {inv_num}<br/>
-    <b>Date of Invoice:</b> {datetime.now().strftime('%d/%m/%Y')}<br/>
-    <b>Payment Due Date:</b> 25/10/2026<br/>
+    <b>Date of Invoice:</b> {inv_date_str}<br/>
+    <b>Payment Due Date:</b> {due_date_str}<br/>
     <b>Payment Terms:</b> Net 75 Days<br/>
     <b>Place of Supply:</b> 29-Karnataka (Inter-State IGST)
     """

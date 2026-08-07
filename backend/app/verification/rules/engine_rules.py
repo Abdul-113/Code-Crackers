@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Dict, Any, Tuple
 from app.verification.rules.base_rule import BaseRule
 
@@ -39,8 +39,9 @@ class InvoiceDatePastRule(BaseRule):
             # ISO date format parsing
             inv_date = datetime.strptime(inv_date_str[:10], "%Y-%m-%d").date()
             today = datetime.utcnow().date()
-            if inv_date <= today:
-                return True, f"Invoice date {inv_date} is valid (past or today)."
+            # Allow +1 day buffer to account for global timezone differences (e.g. IST UTC+5:30)
+            if inv_date <= today + timedelta(days=1):
+                return True, f"Invoice date {inv_date} is valid (issued on or before current business date)."
             return False, f"Invoice date {inv_date} cannot be in the future (today is {today})."
         except Exception as exc:
             return False, f"Invalid date format (expected YYYY-MM-DD): {inv_date_str}"
