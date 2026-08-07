@@ -39,6 +39,7 @@ from app.events.routes.notification_routes import router as notification_router
 from app.events.routes.activity_routes import router as activity_router
 from app.api.routes.admin_routes import router as admin_router
 from app.api.routes.analytics_routes import router as analytics_router
+from app.api.routes.buyer_routes import router as buyer_router
 
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -77,6 +78,7 @@ app.include_router(verification_router, prefix="/api")
 app.include_router(listing_router, prefix="/api")
 app.include_router(notification_router, prefix="/api")
 app.include_router(activity_router, prefix="/api")
+app.include_router(buyer_router, prefix="/api")
 app.include_router(admin_router)
 app.include_router(analytics_router)
 
