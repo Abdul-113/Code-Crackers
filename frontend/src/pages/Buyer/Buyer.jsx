@@ -561,7 +561,7 @@ export default function Buyer() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
-                <BuyerCreditAssessment initialGstin={currentUser?.buyerGST || '29AAACI1681G1Z0'} />
+                <BuyerCreditAssessment initialGstin={currentUser?.buyerGST || '29AAACI4798L1ZU'} />
               </motion.div>
             )}
 

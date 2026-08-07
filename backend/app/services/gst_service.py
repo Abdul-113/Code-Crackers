@@ -67,7 +67,7 @@ class GSTService:
                 "gstin": clean_gst,
                 "validGstin": True
             },
-            "returns": self._fixtures.get("29AAACI1681G1Z0", {}).get("returns", []),
+            "returns": self._fixtures.get("29AAACI4798L1ZU", {}).get("returns", []),
             "source": "SYNTHETIC_CACHE"
         }
 

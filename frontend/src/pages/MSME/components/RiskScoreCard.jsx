@@ -7,7 +7,7 @@ export default function RiskScoreCard({ extractedData, onNext }) {
   const [loading, setLoading] = useState(true);
   const [assessment, setAssessment] = useState(null);
 
-  const buyerGST = extractedData?.buyerGST || extractedData?.buyer_gst || '29AAACI1681G1Z0';
+  const buyerGST = extractedData?.buyerGST || extractedData?.buyer_gst || '29AAACI4798L1ZU';
   const buyerName = extractedData?.buyerCompany || extractedData?.buyerName || 'Enterprise Obligor';
 
   useEffect(() => {

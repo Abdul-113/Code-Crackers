@@ -9,13 +9,13 @@ import { gstService } from '@/services/gstService';
 import toast from 'react-hot-toast';
 
 const PRESET_BUYERS = [
-  { name: 'Infosys Limited', gstin: '29AAACI1681G1Z0', state: 'Karnataka', tag: 'Prime AAA' },
+  { name: 'Infosys Limited', gstin: '29AAACI4798L1ZU', state: 'Karnataka', tag: 'Prime AAA' },
   { name: 'Sandbox FinTech Ltd', gstin: '24ABKCS2033B1ZV', state: 'Gujarat', tag: 'Live Sandbox' },
   { name: 'Tata Consultancy Services', gstin: '27AAACG7170L1ZU', state: 'Maharashtra', tag: 'Enterprise AA' },
   { name: 'Nexura Robotics', gstin: '33AAACN8145P1Z8', state: 'Tamil Nadu', tag: 'Growth A' }
 ];
 
-export default function BuyerCreditAssessment({ initialGstin = '29AAACI1681G1Z0' }) {
+export default function BuyerCreditAssessment({ initialGstin = '29AAACI4798L1ZU' }) {
   const [selectedGstin, setSelectedGstin] = useState(initialGstin);
   const [customInput, setCustomInput] = useState('');
   const [loading, setLoading] = useState(true);

@@ -146,7 +146,7 @@ class AIAnalysisService:
             raise ValueError(f"Invoice {invoice_id} not found in database.")
 
         # Fetch GST taxpayer facts for sovereign underwriting
-        buyer_gst = invoice_doc.get("buyerGST") or invoice_doc.get("buyer_gst") or "29AAACI1681G1Z0"
+        buyer_gst = invoice_doc.get("buyerGST") or invoice_doc.get("buyer_gst") or "29AAACI4798L1ZU"
         try:
             gst_tp = gst_service.verify_gstin(buyer_gst)
             gst_returns = gst_service.get_return_filing_status(buyer_gst)
