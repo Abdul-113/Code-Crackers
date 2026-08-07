@@ -67,7 +67,7 @@ class AIAnalysisService:
         """
         Sends the prompt to Groq. Uses Llama 3.3 70B as primary, and falls back to Llama 3.1 70B.
         """
-        models = ["llama-3.3-70b-specdec", "llama-3.1-70b-versatile", "llama3-70b-8192"]
+        models = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]
         last_err = None
 
         for model in models:
