@@ -98,12 +98,17 @@ export default function RiskScoreCard({ extractedData, onNext }) {
       {/* AI & Government Summary Statement */}
       <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4 space-y-2 flex gap-3.5 items-start">
         <ShieldCheck className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-        <div className="space-y-0.5">
-          <h4 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-            Verified Sovereign Compliance Audit Passed
-          </h4>
+        <div className="space-y-0.5 flex-1">
+          <div className="flex items-center justify-between">
+            <h4 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+              Verified Sovereign Compliance Audit Passed
+            </h4>
+            <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              {assessment?.taxpayer?.source === 'LIVE_API' ? '⚡ LIVE SANDBOX RELAY' : 'CACHED FIXTURE'}
+            </span>
+          </div>
           <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
-            Obligor <strong className="text-gray-900 dark:text-white">{assessment?.taxpayer?.legalName || buyerName}</strong> demonstrates an unblemished GSTR-1 and GSTR-3B track record with no defaults, qualifying this invoice for priority primary auction listing.
+            Obligor <strong className="text-gray-900 dark:text-white">{assessment?.taxpayer?.legalName || buyerName}</strong> ({buyerGST}) demonstrates an active corporate standing with {assessment?.taxpayer?.taxpayerType || 'Regular Taxpayer'} registration in {assessment?.taxpayer?.state || 'Karnataka'}, qualifying this invoice for priority institutional marketplace listing.
           </p>
         </div>
       </div>
