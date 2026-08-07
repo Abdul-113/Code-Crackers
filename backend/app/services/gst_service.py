@@ -122,40 +122,46 @@ class GSTService:
         token = self._authenticate()
         
         if token:
-            verify_url = f"{self.base_url}/gst/compliance/public/gstin/verify"
+            endpoints = [
+                f"{self.base_url}/gst/compliance/public/gstin/search",
+                f"{self.base_url}/gst/compliance/public/gstin/verify"
+            ]
             payload = json.dumps({"gstin": clean_gst}).encode("utf-8")
-            req = urllib.request.Request(
-                verify_url,
-                data=payload,
-                headers={
-                    "Authorization": token,
-                    "x-api-key": self.api_key,
-                    "x-api-version": "1.0.0",
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                method="POST"
-            )
-            try:
-                with urllib.request.urlopen(req, timeout=6) as resp:
-                    resp_data = json.loads(resp.read().decode("utf-8"))
-                    inner_data = resp_data.get("data", {}).get("data", resp_data.get("data", {}))
-                    if inner_data and inner_data.get("legalName"):
-                        return {
-                            "success": True,
-                            "legalName": inner_data.get("legalName", ""),
-                            "tradeName": inner_data.get("tradeName") or inner_data.get("legalName", ""),
-                            "status": inner_data.get("status", "Active"),
-                            "state": inner_data.get("stateName", "Unknown"),
-                            "stateCode": inner_data.get("stateCode", ""),
-                            "taxpayerType": inner_data.get("taxpayerType") or inner_data.get("bussNature", "Regular"),
-                            "registrationDate": inner_data.get("regStartDate", ""),
-                            "pan": inner_data.get("pan", ""),
-                            "gstin": clean_gst,
-                            "source": "LIVE_API"
-                        }
-            except Exception as e:
-                logger.warning(f"Live verify_gstin failed for {clean_gst}: {e}. Falling back to cached fixture.")
+            
+            for verify_url in endpoints:
+                req = urllib.request.Request(
+                    verify_url,
+                    data=payload,
+                    headers={
+                        "authorization": token,
+                        "x-api-key": self.api_key,
+                        "x-api-version": "1.0",
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    method="POST"
+                )
+                try:
+                    with urllib.request.urlopen(req, timeout=6) as resp:
+                        resp_data = json.loads(resp.read().decode("utf-8"))
+                        inner_data = resp_data.get("data", {}).get("data", resp_data.get("data", {}))
+                        if inner_data and inner_data.get("legalName"):
+                            return {
+                                "success": True,
+                                "legalName": inner_data.get("legalName", ""),
+                                "tradeName": inner_data.get("tradeName") or inner_data.get("legalName", ""),
+                                "status": inner_data.get("status", "Active"),
+                                "state": inner_data.get("stateName", "Unknown"),
+                                "stateCode": inner_data.get("stateCode", ""),
+                                "taxpayerType": inner_data.get("taxpayerType") or inner_data.get("bussNature", "Regular"),
+                                "registrationDate": inner_data.get("regStartDate", ""),
+                                "pan": inner_data.get("pan", ""),
+                                "gstin": clean_gst,
+                                "source": "LIVE_API"
+                            }
+                except Exception as e:
+                    self._token = None  # Force re-authentication on next cycle
+                    logger.warning(f"Live verify_gstin failed for {clean_gst} on {verify_url}: {e}. Falling back to cached fixture.")
 
         # Fallback
         fb = self._get_fallback_data(clean_gst)
@@ -190,9 +196,9 @@ class GSTService:
                 track_url,
                 data=payload,
                 headers={
-                    "Authorization": token,
+                    "authorization": token,
                     "x-api-key": self.api_key,
-                    "x-api-version": "1.0.0",
+                    "x-api-version": "1.0",
                     "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
@@ -205,6 +211,7 @@ class GSTService:
                     if efiled_list:
                         return efiled_list
             except Exception as e:
+                self._token = None
                 logger.warning(f"Live get_return_filing_status failed for {clean_gst}: {e}. Falling back to cached fixture.")
 
         # Fallback
