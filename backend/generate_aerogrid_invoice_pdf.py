@@ -12,7 +12,7 @@ def generate_irn():
     random_bytes = os.urandom(32)
     return hashlib.sha256(random_bytes).hexdigest()
 
-def create_invoice_pdf(output_path):
+def create_invoice_pdf(output_path, inv_num="AG-2026-AI-8832"):
     doc = SimpleDocTemplate(
         output_path,
         pagesize=letter,
@@ -79,10 +79,11 @@ def create_invoice_pdf(output_path):
 
     # 2. IRN Box
     irn = generate_irn()
+    ack_num = f"112026{int(datetime.now().timestamp())}"
     irn_box_data = [
         [
             Paragraph(f"<b>IRN (Invoice Reference Number):</b><br/>{irn}", irn_style),
-            Paragraph("<b>Ack No:</b> 1120268892104<br/><b>Ack Date:</b> 2026-08-08 02:30:15", ParagraphStyle('Ack', parent=styles['Normal'], fontSize=7.5, leading=10, textColor=colors.HexColor('#475569'), alignment=TA_RIGHT))
+            Paragraph(f"<b>Ack No:</b> {ack_num}<br/><b>Ack Date:</b> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", ParagraphStyle('Ack', parent=styles['Normal'], fontSize=7.5, leading=10, textColor=colors.HexColor('#475569'), alignment=TA_RIGHT))
         ]
     ]
     t_irn = Table(irn_box_data, colWidths=[400, 140])
@@ -96,8 +97,6 @@ def create_invoice_pdf(output_path):
     elements.append(Spacer(1, 10))
 
     # 3. Seller and Buyer details
-    # BUYER: Infosys Limited
-    # SELLER: AeroGrid AI Solutions Pvt. Ltd. (MSME)
     seller_html = """
     <b>Sold by / Supplier (MSME):</b><br/>
     <b>AeroGrid AI Solutions Pvt. Ltd.</b><br/>
@@ -116,10 +115,10 @@ def create_invoice_pdf(output_path):
     <b>PAN:</b> AAACI1681G | <b>State:</b> Karnataka (29)
     """
 
-    meta_html = """
-    <b>Invoice No:</b> AG-2026-AI-8831<br/>
-    <b>Date of Invoice:</b> 08/08/2026<br/>
-    <b>Payment Due Date:</b> 22/10/2026<br/>
+    meta_html = f"""
+    <b>Invoice No:</b> {inv_num}<br/>
+    <b>Date of Invoice:</b> {datetime.now().strftime('%d/%m/%Y')}<br/>
+    <b>Payment Due Date:</b> 25/10/2026<br/>
     <b>Payment Terms:</b> Net 75 Days<br/>
     <b>Place of Supply:</b> 29-Karnataka (Inter-State IGST)
     """
@@ -255,8 +254,15 @@ def create_invoice_pdf(output_path):
     print(f"Successfully generated invoice PDF at: {output_path}")
 
 if __name__ == "__main__":
+    import random
+    unique_suffix = random.randint(1000, 9999)
+    inv_code = f"AG-2026-AI-{unique_suffix}"
+    
     out_pdf = os.path.join(os.getcwd(), "Sample_Invoice_Infosys_AeroGrid_AI.pdf")
-    create_invoice_pdf(out_pdf)
+    create_invoice_pdf(out_pdf, inv_code)
     root_pdf = os.path.abspath(os.path.join(os.getcwd(), "..", "Sample_Invoice_Infosys_AeroGrid_AI.pdf"))
     shutil.copyfile(out_pdf, root_pdf)
-    print(f"Copied sample invoice to root workspace at: {root_pdf}")
+    
+    v2_pdf = os.path.abspath(os.path.join(os.getcwd(), "..", "Sample_Invoice_Infosys_AeroGrid_AI_v2.pdf"))
+    shutil.copyfile(out_pdf, v2_pdf)
+    print(f"Generated fresh unique invoice {inv_code} at {root_pdf} and {v2_pdf}")
