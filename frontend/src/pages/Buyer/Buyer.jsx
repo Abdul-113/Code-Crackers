@@ -6,11 +6,13 @@ import {
   CheckCircle2, Clock, FileText, Zap,
   Check, X, Building2, ShieldCheck, ChevronRight,
   ArrowRight, Inbox, Lock, Sparkles, RefreshCw,
-  Calendar, Hash, Copy, CheckCircle, ExternalLink, ShieldAlert
+  Calendar, Hash, Copy, CheckCircle, ExternalLink, ShieldAlert,
+  Award, TrendingUp
 } from 'lucide-react';
 import ContentContainer from '@/components/layout/ContentContainer';
 import toast from 'react-hot-toast';
 import { useEscrow } from '@/hooks/useEscrow';
+import BuyerCreditAssessment from '@/components/buyer/BuyerCreditAssessment';
 
 const fmt = (val) =>
   new Intl.NumberFormat('en-IN', {
@@ -479,15 +481,24 @@ export default function Buyer() {
 
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="space-y-3 max-w-xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 shadow-sm">
-                <ShieldCheck className="h-4 w-4 text-emerald-300" />
-                <span className="text-xs font-bold text-white tracking-wide uppercase">Buyer Treasury Portal</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 shadow-sm">
+                  <ShieldCheck className="h-4 w-4 text-emerald-300" />
+                  <span className="text-xs font-bold text-white tracking-wide uppercase">Buyer Treasury Portal</span>
+                </div>
+                <button
+                  onClick={() => setActiveTab('credit')}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/40 text-xs font-bold text-emerald-200 hover:bg-emerald-500/30 transition-all shadow-sm"
+                >
+                  <Award className="h-3.5 w-3.5 text-emerald-300" />
+                  GSTN Score: 100/100 (AAA)
+                </button>
               </div>
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
                 Treasury & Escrow Management
               </h1>
               <p className="text-white/80 text-sm leading-relaxed">
-                Counterparty corporate portal for <strong className="text-white underline decoration-emerald-400 underline-offset-4">{companyName}</strong>. Review delivery confirmations and monitor automated zero-trust escrow disbursements.
+                Counterparty corporate portal for <strong className="text-white underline decoration-emerald-400 underline-offset-4">{companyName}</strong>. Review delivery confirmations, monitor automated escrow disbursements, and track real-time GST credit compliance.
               </p>
             </div>
 
@@ -525,7 +536,7 @@ export default function Buyer() {
         {/* ── Tabs & Invoice Grid ───────────────────────────────────────── */}
         <div className="space-y-6">
           {/* Tab Navigation */}
-          <div className="flex items-center gap-3 p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 w-fit">
+          <div className="flex flex-wrap items-center gap-3 p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 w-fit">
             <Tab active={activeTab === 'escrow'} onClick={() => setActiveTab('escrow')} count={fundedInvoices.length}>
               <Lock className="h-4 w-4" /> Active Escrow Vaults
             </Tab>
@@ -535,10 +546,25 @@ export default function Buyer() {
             <Tab active={activeTab === 'assignment'} onClick={() => setActiveTab('assignment')} count={assignmentInvoices.length}>
               <FileText className="h-4 w-4" /> Sign Assignments
             </Tab>
+            <Tab active={activeTab === 'credit'} onClick={() => setActiveTab('credit')} count="AAA">
+              <Award className="h-4 w-4 text-emerald-400" /> GST Credit Assessment
+            </Tab>
           </div>
 
           {/* Tab Content */}
           <AnimatePresence mode="wait">
+            {activeTab === 'credit' && (
+              <motion.div
+                key="credit"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <BuyerCreditAssessment initialGstin={currentUser?.buyerGST || '29AAACI1681G1Z0'} />
+              </motion.div>
+            )}
+
             {activeTab === 'escrow' && (
               <motion.div
                 key="escrow"
