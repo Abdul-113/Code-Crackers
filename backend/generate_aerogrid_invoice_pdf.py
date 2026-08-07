@@ -258,11 +258,14 @@ if __name__ == "__main__":
     unique_suffix = random.randint(1000, 9999)
     inv_code = f"AG-2026-AI-{unique_suffix}"
     
-    out_pdf = os.path.join(os.getcwd(), "Sample_Invoice_Infosys_AeroGrid_AI.pdf")
-    create_invoice_pdf(out_pdf, inv_code)
-    root_pdf = os.path.abspath(os.path.join(os.getcwd(), "..", "Sample_Invoice_Infosys_AeroGrid_AI.pdf"))
-    shutil.copyfile(out_pdf, root_pdf)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.abspath(os.path.join(script_dir, ".."))
     
-    v2_pdf = os.path.abspath(os.path.join(os.getcwd(), "..", "Sample_Invoice_Infosys_AeroGrid_AI_v2.pdf"))
-    shutil.copyfile(out_pdf, v2_pdf)
-    print(f"Generated fresh unique invoice {inv_code} at {root_pdf} and {v2_pdf}")
+    # Save directly in project root
+    v2_pdf = os.path.join(project_root, "Sample_Invoice_Infosys_AeroGrid_AI_v2.pdf")
+    create_invoice_pdf(v2_pdf, inv_code)
+    
+    v1_pdf = os.path.join(project_root, "Sample_Invoice_Infosys_AeroGrid_AI.pdf")
+    shutil.copyfile(v2_pdf, v1_pdf)
+    
+    print(f"Generated fresh unique invoice {inv_code} at:\n1) {v2_pdf}\n2) {v1_pdf}")
