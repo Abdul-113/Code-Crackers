@@ -120,6 +120,7 @@ class GSTService:
             - pan
         """
         clean_gst = (gstin or "").strip().upper()
+        logger.info(f"⚡ [Sandbox.co.in] Initiating live GSTIN verification for '{clean_gst}'...")
         token = self._authenticate()
         
         if token:
@@ -136,17 +137,19 @@ class GSTService:
                     headers={
                         "authorization": token,
                         "x-api-key": self.api_key,
-                        "x-api-version": "1.0",
+                        "x-api-version": "1.0.0",
                         "Content-Type": "application/json",
                         "Accept": "application/json"
                     },
                     method="POST"
                 )
                 try:
+                    logger.info(f"⚡ [Sandbox.co.in] POST {verify_url} with GSTIN {clean_gst}...")
                     with urllib.request.urlopen(req, timeout=6) as resp:
                         resp_data = json.loads(resp.read().decode("utf-8"))
                         inner_data = resp_data.get("data", {}).get("data", resp_data.get("data", {}))
                         if inner_data and inner_data.get("legalName"):
+                            logger.info(f"✅ [Sandbox.co.in] Live taxpayer lookup SUCCESS: {inner_data.get('legalName')} ({clean_gst})")
                             return {
                                 "success": True,
                                 "legalName": inner_data.get("legalName", ""),
@@ -175,6 +178,7 @@ class GSTService:
         # Fallback
         fb = self._get_fallback_data(clean_gst)
         tp = fb["taxpayer"]
+        logger.info(f"ℹ️ [GST Service] Serving taxpayer data for '{clean_gst}' via {fb.get('source', 'FIXTURE')}")
         return {
             "success": True,
             "legalName": tp.get("legalName", "Unknown Corporate Buyer"),
@@ -196,35 +200,44 @@ class GSTService:
             List of GSTR-1 and GSTR-3B filed periods with dates and status.
         """
         clean_gst = (gstin or "").strip().upper()
+        logger.info(f"⚡ [Sandbox.co.in] Initiating GSTR filing status lookup for '{clean_gst}'...")
         token = self._authenticate()
 
         if token:
-            track_url = f"{self.base_url}/gst/compliance/public/gstrs/track?financial_year={urllib.parse.quote(financial_year)}"
-            payload = json.dumps({"gstin": clean_gst}).encode("utf-8")
+            track_url = f"{self.base_url}/gst/compliance/public/gstrs/track?gstin={clean_gst}&financial_year={urllib.parse.quote(financial_year)}"
             req = urllib.request.Request(
                 track_url,
-                data=payload,
                 headers={
                     "authorization": token,
                     "x-api-key": self.api_key,
-                    "x-api-version": "1.0",
-                    "Content-Type": "application/json",
+                    "x-api-version": "1.0.0",
                     "Accept": "application/json"
                 },
-                method="POST"
+                method="GET"
             )
             try:
+                logger.info(f"⚡ [Sandbox.co.in] GET {track_url}...")
                 with urllib.request.urlopen(req, timeout=6) as resp:
                     resp_data = json.loads(resp.read().decode("utf-8"))
-                    efiled_list = resp_data.get("data", {}).get("data", {}).get("EFiledlist", [])
-                    if efiled_list:
-                        return efiled_list
+                    inner_returns = resp_data.get("data", {}).get("returns", resp_data.get("data", {}).get("data", resp_data.get("data", [])))
+                    if isinstance(inner_returns, list) and inner_returns:
+                        logger.info(f"✅ [Sandbox.co.in] Live GSTR tracking SUCCESS: {len(inner_returns)} periods found for {clean_gst}")
+                        return inner_returns
+            except urllib.error.HTTPError as e:
+                self._token = None
+                err_body = ""
+                try:
+                    err_body = e.read().decode("utf-8")
+                except Exception:
+                    pass
+                logger.warning(f"Live get_return_filing_status HTTP {e.code} for {clean_gst}: {err_body or e}. Falling back to cached fixture.")
             except Exception as e:
                 self._token = None
                 logger.warning(f"Live get_return_filing_status failed for {clean_gst}: {e}. Falling back to cached fixture.")
 
         # Fallback
         fb = self._get_fallback_data(clean_gst)
+        logger.info(f"ℹ️ [GST Service] Serving GSTR returns for '{clean_gst}' via {fb.get('source', 'FIXTURE')}")
         return fb.get("returns", [])
 
 gst_service = GSTService()

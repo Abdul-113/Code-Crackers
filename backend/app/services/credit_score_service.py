@@ -32,12 +32,21 @@ def compute_buyer_credit_score(
     if as_of_date is None:
         as_of_date = datetime.date.today()
 
+    if not isinstance(taxpayer_data, dict):
+        taxpayer_data = {}
+
+    if not isinstance(returns_data, list):
+        returns_data = []
+
     # ─────────────────────────────────────────────────────────────────────────
     # 1. Filing Consistency (Weight: 40%)
     # ─────────────────────────────────────────────────────────────────────────
     # Expecting 12 GSTR-1 and 12 GSTR-3B filings per annual cycle = 24 target filings
     expected_filings_count = 24
-    valid_returns = [r for r in returns_data if r.get("status", "").lower() == "filed" or r.get("valid") == "Y"]
+    valid_returns = [
+        r for r in returns_data 
+        if isinstance(r, dict) and (str(r.get("status", "")).lower() == "filed" or str(r.get("valid", "")).upper() == "Y")
+    ]
     filing_count = len(valid_returns)
     
     # Cap ratio at 1.0
