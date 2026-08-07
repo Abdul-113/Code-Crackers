@@ -272,6 +272,21 @@ export default function InvoiceDetails() {
     );
   };
 
+  const handleApproveAsBuyer = async () => {
+    try {
+      toast.loading('Confirming Buyer delivery approval...', { id: 'buyer-approve' });
+      await axios.put(`${API_BASE}/v1/invoices/${invoiceId}`, {
+        verificationStatus: 'BUYER_APPROVED',
+        buyerApproved: true
+      });
+      toast.success('🎉 Invoice approved by Buyer (Infosys)! Delivery confirmed.', { id: 'buyer-approve' });
+      refetchInvoice();
+      refetchVerification();
+    } catch (err) {
+      toast.error('Buyer approval failed: ' + (err.response?.data?.detail || err.message), { id: 'buyer-approve' });
+    }
+  };
+
   const handleApproveInvoice = async () => {
     setApprovingId(invoiceId);
     try {
@@ -355,15 +370,25 @@ export default function InvoiceDetails() {
             isBuyerApproved ? (
               <button
                 onClick={handleMintNFT}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-400 text-white text-xs font-bold transition shadow-lg shadow-violet-500/20 animate-pulse"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-400 text-white text-xs font-bold transition shadow-lg shadow-violet-500/20 animate-pulse"
               >
                 <Hexagon className="h-4 w-4" />
                 <span>Mint NFT</span>
               </button>
             ) : (
-              <div className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-semibold" title="Awaiting Corporate Buyer Approval">
-                <Clock className="h-4 w-4 animate-spin text-amber-400" />
-                <span>Awaiting Buyer Approval</span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleApproveAsBuyer}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white text-xs font-bold transition shadow-md shadow-emerald-500/20"
+                  title="Confirm delivery acceptance as Corporate Buyer (Infosys)"
+                >
+                  <CheckCircle2 className="h-4 w-4" />
+                  <span>Buyer: Approve Delivery</span>
+                </button>
+                <div className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-semibold" title="Awaiting Corporate Buyer Approval">
+                  <Clock className="h-4 w-4 animate-spin text-amber-400" />
+                  <span>Awaiting Buyer Approval</span>
+                </div>
               </div>
             )
           )}
