@@ -152,13 +152,13 @@ export default function MSME() {
                 <ExtractedDataCard initialData={extractedData} onNext={handleNextStep} />
               )}
               {wizardStep === 4 && (
-                <GSTVerificationCard onNext={handleNextStep} />
+                <GSTVerificationCard extractedData={extractedData} onNext={handleNextStep} />
               )}
               {wizardStep === 5 && (
                 <DuplicateCheckAnimation onNext={handleNextStep} />
               )}
               {wizardStep === 6 && (
-                <RiskScoreCard onNext={handleNextStep} />
+                <RiskScoreCard extractedData={extractedData} onNext={handleNextStep} />
               )}
               {wizardStep === 7 && (
                 <NFTPreview onNext={handleNextStep} />
