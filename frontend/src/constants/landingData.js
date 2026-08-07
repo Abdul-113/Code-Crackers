@@ -7,12 +7,13 @@ import {
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
 export const NAV_LINKS = [
-  { label: 'Home',       href: '#hero' },
+  { label: 'Home',         href: '#hero' },
   { label: 'How It Works', href: '#solution' },
-  { label: 'Features',  href: '#features' },
-  { label: 'Technology', href: '#technology' },
-  { label: 'FAQ',        href: '#faq' },
-  { label: 'Contact',    href: '#footer' },
+  { label: 'Features',     href: '#features' },
+  { label: 'B2B / TReDS',  href: '#b2b-saas' },
+  { label: 'Technology',   href: '#technology' },
+  { label: 'FAQ',          href: '#faq' },
+  { label: 'Contact',      href: '#footer' },
 ];
 
 // ─── Statistics ───────────────────────────────────────────────────────────────
