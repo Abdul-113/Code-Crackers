@@ -68,19 +68,26 @@ async def startup_event():
     logger.info("Blockchain event listener scheduled.")
 
 
-# Include routes
-app.include_router(ai_router, prefix="/api")
-app.include_router(business_router, prefix="/api")
-app.include_router(invoice_router, prefix="/api")
-app.include_router(v1_ai_router, prefix="/api")
-app.include_router(copilot_router, prefix="/api")
-app.include_router(verification_router, prefix="/api")
-app.include_router(listing_router, prefix="/api")
-app.include_router(notification_router, prefix="/api")
-app.include_router(activity_router, prefix="/api")
-app.include_router(buyer_router, prefix="/api")
-app.include_router(admin_router)
-app.include_router(analytics_router)
+# Include routes with /api prefix as well as root to support any frontend env configuration
+routers = [
+    ai_router,
+    business_router,
+    invoice_router,
+    v1_ai_router,
+    copilot_router,
+    verification_router,
+    listing_router,
+    notification_router,
+    activity_router,
+    buyer_router,
+    admin_router,
+    analytics_router,
+]
+
+for r in routers:
+    app.include_router(r, prefix="/api")
+    app.include_router(r)
+
 
 
 

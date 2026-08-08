@@ -1,7 +1,8 @@
 import fixtures from '@/fixtures/gstFixtures.json';
 import { computeBuyerCreditScore } from './creditScoreService';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+const rawApiUrl = import.meta.env.VITE_API_URL || '';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || (rawApiUrl ? rawApiUrl.replace(/\/api\/?$/, '') : 'http://localhost:8000');
 
 /**
  * Dedicated GST Service for Frontend.
