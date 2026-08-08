@@ -65,6 +65,25 @@
   ::-webkit-scrollbar-thumb { background: #2563eb44; border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: #2563eb88; }
 
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.5) transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.1);
+    border-radius: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.5);
+    border-radius: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.8);
+  }
+
   /* Section padding */
   .section-padding {
     @apply py-24 px-4 sm:px-6 lg:px-8;

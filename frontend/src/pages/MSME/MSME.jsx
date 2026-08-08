@@ -23,7 +23,6 @@ import AIScanAnimation from './components/AIScanAnimation';
 import ExtractedDataCard from './components/ExtractedDataCard';
 import GSTVerificationCard from './components/GSTVerificationCard';
 import DuplicateCheckAnimation from './components/DuplicateCheckAnimation';
-import RiskScoreCard from './components/RiskScoreCard';
 import NFTPreview from './components/NFTPreview';
 import MarketplaceReadyScreen from './components/MarketplaceReadyScreen';
 
@@ -158,12 +157,9 @@ export default function MSME() {
                 <DuplicateCheckAnimation onNext={handleNextStep} />
               )}
               {wizardStep === 6 && (
-                <RiskScoreCard extractedData={extractedData} onNext={handleNextStep} />
-              )}
-              {wizardStep === 7 && (
                 <NFTPreview onNext={handleNextStep} />
               )}
-              {wizardStep === 8 && (
+              {wizardStep === 7 && (
                 <MarketplaceReadyScreen />
               )}
             </div>
@@ -374,48 +370,7 @@ export default function MSME() {
                   )}
                 </div>
 
-                {/* Document Center */}
-                <div className="rounded-2xl border border-gray-100 dark:border-dark-border bg-white dark:bg-dark-card p-6 shadow-sm space-y-5">
-                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50 dark:border-slate-800 pb-3">Document Center</h3>
-                  
-                  {/* Category Chips */}
-                  <div className="flex flex-wrap gap-2 text-[9px] font-bold uppercase tracking-wider">
-                    {['Invoices', 'Purchase Orders', 'GST Documents'].map(cat => (
-                      <button
-                        key={cat}
-                        onClick={() => setSelectedDocCategory(cat)}
-                        className={`px-3 py-1.5 rounded-lg border transition ${
-                          selectedDocCategory === cat 
-                            ? 'border-primary-500 bg-primary-50 dark:bg-primary-950/20 text-primary-600 dark:text-primary-400' 
-                            : 'border-gray-150 dark:border-slate-800 bg-white hover:bg-gray-50'
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    ))}
-                  </div>
 
-                  {/* Documents list */}
-                  <div className="space-y-2.5">
-                    {documents.filter(d => d.category === selectedDocCategory).map((doc) => (
-                      <div key={doc.name} className="p-3.5 rounded-xl border border-gray-150 dark:border-slate-800/80 bg-gray-50/30 dark:bg-slate-900/10 flex justify-between items-center gap-3">
-                        <div className="flex items-center gap-2 text-xs">
-                          <FileCode className="h-4.5 w-4.5 text-primary-500" />
-                          <div>
-                            <span className="font-semibold text-gray-700 dark:text-gray-300 block">{doc.name}</span>
-                            <span className="text-[10px] text-gray-400">{doc.size} • {doc.date}</span>
-                          </div>
-                        </div>
-                        <button 
-                          onClick={() => handleDocumentDelete(doc.name)}
-                          className="p-1.5 rounded-lg border border-gray-100 dark:border-slate-800 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/10 transition"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
 
               </div>
 

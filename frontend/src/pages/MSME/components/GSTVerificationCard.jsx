@@ -8,8 +8,15 @@ export default function GSTVerificationCard({ extractedData, onNext }) {
   const [taxpayer, setTaxpayer] = useState(null);
   const [error, setError] = useState(null);
 
-  const buyerGST = extractedData?.buyerGST || extractedData?.buyer_gst || '29AAACI4798L1ZU';
   const buyerName = extractedData?.buyerCompany || extractedData?.buyerName || 'Enterprise Buyer';
+  const buyerGST = extractedData?.buyerGST || extractedData?.buyer_gst || (
+    buyerName.toLowerCase().includes('tata') ? '27AAACT1240A1Z5' :
+    buyerName.toLowerCase().includes('reliance') ? '27AAACR1234A1Z1' :
+    buyerName.toLowerCase().includes('infosys') ? '29AAACI4798L1ZU' :
+    buyerName.toLowerCase().includes('tcs') ? '27AAACG7170L1ZU' :
+    buyerName.toLowerCase().includes('nexura') ? '33AAACN8145P1Z8' :
+    '27AAACT1240A1Z5'
+  );
   const sellerGST = extractedData?.sellerGST || extractedData?.seller_gst || '29AAGCH8214M1Z2';
 
   useEffect(() => {

@@ -7,7 +7,6 @@ const WIZARD_STEPS = [
   'Review',
   'GST Verification',
   'Duplicate Check',
-  'AI Audit',
   'Mint NFT',
   'Ready'
 ];
