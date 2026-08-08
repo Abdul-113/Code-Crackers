@@ -13,7 +13,7 @@ export const gstService = {
    * Retrieves buyer credit assessment score and GST details.
    */
   async getBuyerCreditScore(gstin) {
-    const cleanGst = (gstin || '29AAACI4798L1ZU').trim().toUpperCase();
+    const cleanGst = (gstin || '27AAACT1240A1Z5').trim().toUpperCase();
 
     try {
       const resp = await fetch(`${BACKEND_URL}/api/v1/buyer/credit-score/${cleanGst}`, {
@@ -33,17 +33,21 @@ export const gstService = {
     }
 
     // Fallback: use local fixtures + pure creditScoreService computation
-    const fixture = fixtures[cleanGst] || fixtures['29AAACI4798L1ZU'];
+    const fixture = fixtures[cleanGst];
+    const stateCode = cleanGst.slice(0, 2);
+    const stateName = stateCode === '27' ? 'Maharashtra' : stateCode === '29' ? 'Karnataka' : stateCode === '33' ? 'Tamil Nadu' : stateCode === '24' ? 'Gujarat' : 'Active Region';
+    
     const tp = fixture?.taxpayer || {
-      legalName: cleanGst.includes('AAACI') ? 'INFOSYS LIMITED' : 'ENTERPRISE BUYER',
+      legalName: cleanGst === '27AAACT1240A1Z5' ? 'TATA MOTORS LIMITED' : 'ENTERPRISE OBLIGOR',
       status: 'Active',
-      stateName: 'Karnataka',
+      stateName: stateName,
+      stateCode: stateCode,
       taxpayerType: 'Regular',
       regStartDate: '01/07/2017',
-      pan: cleanGst.slice(2, 12),
+      pan: cleanGst.length >= 12 ? cleanGst.slice(2, 12) : 'XXXXXXXXXX',
       gstin: cleanGst,
     };
-    const rets = fixture?.returns || fixtures['29AAACI4798L1ZU'].returns;
+    const rets = fixture?.returns || fixtures['27AAACT1240A1Z5']?.returns || fixtures['29AAACI4798L1ZU']?.returns || [];
     
     return computeBuyerCreditScore(tp, rets);
   },
@@ -65,7 +69,7 @@ export const gstService = {
       console.warn('GST verify fallback used:', e);
     }
 
-    const fixture = fixtures[cleanGst] || fixtures['29AAACI4798L1ZU'];
+    const fixture = fixtures[cleanGst];
     return fixture?.taxpayer || { legalName: 'ENTERPRISE BUYER', status: 'Active', gstin: cleanGst };
   }
 };

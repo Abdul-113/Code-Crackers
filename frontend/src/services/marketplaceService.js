@@ -21,6 +21,7 @@ const INITIAL_MARKETPLACE = [
     id: 'INV-2026-001',
     docId: 'INV-2026-001',
     buyer: 'Tata Motors Group',
+    buyerGST: '27AAACT1240A1Z5',
     industry: 'Manufacturing',
     amount: 1240000,
     required: 1240000,
@@ -45,6 +46,7 @@ const INITIAL_MARKETPLACE = [
     id: 'INV-2026-002',
     docId: 'INV-2026-002',
     buyer: 'Reliance Retail Ltd',
+    buyerGST: '27AAACR1234A1Z1',
     industry: 'Retail',
     amount: 850000,
     required: 850000,
@@ -68,6 +70,7 @@ const INITIAL_MARKETPLACE = [
     id: 'INV-2026-003',
     docId: 'INV-2026-003',
     buyer: 'Infosys Tech Corp',
+    buyerGST: '29AAACI4798L1ZU',
     industry: 'IT Services',
     amount: 1420000,
     required: 1420000,
@@ -101,11 +104,31 @@ function getMockMarketplace() {
 
 // ─── Normalise a backend listing document to the UI field shape ──────────────
 function normaliseDoc(raw) {
+  const buyer = raw.buyer || raw.buyerName || 'Unknown Buyer';
+  let buyerGST = raw.buyerGST || raw.buyerGSTIN || raw.buyer_gst || '';
+  if (!buyerGST) {
+    const bLower = buyer.toLowerCase();
+    if (bLower.includes('tata') || (raw.id && String(raw.id).toLowerCase().includes('txp'))) {
+      buyerGST = '27AAACT1240A1Z5';
+    } else if (bLower.includes('infosys')) {
+      buyerGST = '29AAACI4798L1ZU';
+    } else if (bLower.includes('reliance')) {
+      buyerGST = '27AAACR1234A1Z1';
+    } else if (bLower.includes('tcs') || bLower.includes('consultancy')) {
+      buyerGST = '27AAACG7170L1ZU';
+    } else if (bLower.includes('nexura') || bLower.includes('robotics')) {
+      buyerGST = '33AAACN8145P1Z8';
+    } else if (bLower.includes('sandbox')) {
+      buyerGST = '24ABKCS2033B1ZV';
+    }
+  }
+
   return {
     docId:         raw.docId         || raw.invoiceId || raw.id,
     id:            raw.id            || raw.invoiceId,
     invoiceId:     raw.invoiceId     || raw.id,
-    buyer:         raw.buyer         || raw.buyerName  || 'Unknown Buyer',
+    buyer:         buyer,
+    buyerGST:      buyerGST,
     owner:         raw.owner         || raw.sellerName || 'Unknown Seller',
     industry:      raw.industry      || 'General',
     amount:        Number(raw.amount || 0),

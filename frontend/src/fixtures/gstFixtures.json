@@ -1,4 +1,48 @@
 {
+  "27AAACT1240A1Z5": {
+    "taxpayer": {
+      "legalName": "TATA MOTORS LIMITED",
+      "tradeName": "TATA MOTORS LIMITED",
+      "status": "Active",
+      "stateName": "Maharashtra",
+      "stateCode": "27",
+      "taxpayerType": "Regular",
+      "regStartDate": "01/07/2017",
+      "pan": "AAACT1240A",
+      "gstin": "27AAACT1240A1Z5",
+      "validGstin": true
+    },
+    "returns": [
+      { "rtntype": "GSTR3B", "ret_prd": "032024", "dof": "18-04-2024", "status": "Filed", "arn": "AB270324473243F", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "032024", "dof": "09-04-2024", "status": "Filed", "arn": "AA270324397853X", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "022024", "dof": "19-03-2024", "status": "Filed", "arn": "AB2702243978024", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "022024", "dof": "08-03-2024", "status": "Filed", "arn": "AA2702242770796", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "012024", "dof": "19-02-2024", "status": "Filed", "arn": "AB270124317964A", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "012024", "dof": "09-02-2024", "status": "Filed", "arn": "AA270124471591G", "mof": "ONLINE" }
+    ]
+  },
+  "27AAACR1234A1Z1": {
+    "taxpayer": {
+      "legalName": "RELIANCE RETAIL LIMITED",
+      "tradeName": "RELIANCE RETAIL",
+      "status": "Active",
+      "stateName": "Maharashtra",
+      "stateCode": "27",
+      "taxpayerType": "Regular",
+      "regStartDate": "01/07/2017",
+      "pan": "AAACR1234A",
+      "gstin": "27AAACR1234A1Z1",
+      "validGstin": true
+    },
+    "returns": [
+      { "rtntype": "GSTR3B", "ret_prd": "032024", "dof": "18-04-2024", "status": "Filed", "arn": "AB270324473243R", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "032024", "dof": "09-04-2024", "status": "Filed", "arn": "AA270324397853R", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "022024", "dof": "19-03-2024", "status": "Filed", "arn": "AB270224397802R", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "022024", "dof": "08-03-2024", "status": "Filed", "arn": "AA270224277079R", "mof": "ONLINE" },
+      { "rtntype": "GSTR3B", "ret_prd": "012024", "dof": "19-02-2024", "status": "Filed", "arn": "AB270124317964R", "mof": "ONLINE" },
+      { "rtntype": "GSTR1",  "ret_prd": "012024", "dof": "09-02-2024", "status": "Filed", "arn": "AA270124471591R", "mof": "ONLINE" }
+    ]
+  },
   "29AAACI4798L1ZU": {
     "taxpayer": {
       "legalName": "INFOSYS LIMITED",

@@ -25,7 +25,8 @@ export const invoiceService = {
       return this.getMockInvoices();
     }
     try {
-      const q = query(collection(db, 'invoices'), where('ownerId', '==', ownerId));
+      // Firestore stores invoices with field `createdBy` = user UID
+      const q = query(collection(db, 'invoices'), where('createdBy', '==', ownerId));
       const querySnapshot = await getDocs(q);
       const res = [];
       querySnapshot.forEach(doc => {
@@ -93,7 +94,8 @@ export const invoiceService = {
       }, 3000);
       return () => clearInterval(interval);
     }
-    const q = query(collection(db, 'invoices'), where('ownerId', '==', ownerId));
+    // Firestore stores invoices with field `createdBy` = user UID
+    const q = query(collection(db, 'invoices'), where('createdBy', '==', ownerId));
     return onSnapshot(q, (snapshot) => {
       const res = [];
       snapshot.forEach(doc => {
