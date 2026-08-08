@@ -2,6 +2,7 @@ export const MOCK_MARKETPLACE_INVOICES = [
   {
     id: 'INV-2026-001',
     buyer: 'Tata Motors Group',
+    buyerGST: '27AAACT1240A1Z5',
     industry: 'Manufacturing',
     amount: 1240000,
     required: 1240000,
@@ -25,6 +26,7 @@ export const MOCK_MARKETPLACE_INVOICES = [
   {
     id: 'INV-2026-002',
     buyer: 'Reliance Retail Ltd',
+    buyerGST: '27AAACR1234A1Z1',
     industry: 'Retail',
     amount: 850000,
     required: 850000,
@@ -47,6 +49,7 @@ export const MOCK_MARKETPLACE_INVOICES = [
   {
     id: 'INV-2026-003',
     buyer: 'Infosys Tech Corp',
+    buyerGST: '29AAACI4798L1ZU',
     industry: 'IT Services',
     amount: 1420000,
     required: 1420000,
@@ -70,6 +73,7 @@ export const MOCK_MARKETPLACE_INVOICES = [
   {
     id: 'INV-2026-004',
     buyer: 'Apollo Hospitals Group',
+    buyerGST: '33AAACN8145P1Z8',
     industry: 'Healthcare',
     amount: 1850000,
     required: 1850000,
@@ -92,6 +96,7 @@ export const MOCK_MARKETPLACE_INVOICES = [
   {
     id: 'INV-2026-005',
     buyer: 'Blue Dart Logistics',
+    buyerGST: '27AAACT1240A1Z5',
     industry: 'Logistics',
     amount: 620000,
     required: 620000,
@@ -114,6 +119,7 @@ export const MOCK_MARKETPLACE_INVOICES = [
   {
     id: 'INV-2026-006',
     buyer: 'Mahindra & Mahindra',
+    buyerGST: '27AAACT1240A1Z5',
     industry: 'Manufacturing',
     amount: 2200000,
     required: 2200000,
@@ -134,6 +140,7 @@ export const MOCK_MARKETPLACE_INVOICES = [
   {
     id: 'INV-2026-007',
     buyer: 'HDFC Bank Ltd',
+    buyerGST: '27AAACG7170L1ZU',
     industry: 'IT Services',
     amount: 3100000,
     required: 3100000,
@@ -156,6 +163,7 @@ export const MOCK_MARKETPLACE_INVOICES = [
   {
     id: 'INV-2026-008',
     buyer: 'Hindalco Industries',
+    buyerGST: '27AAACT1240A1Z5',
     industry: 'Manufacturing',
     amount: 1540000,
     required: 1540000,

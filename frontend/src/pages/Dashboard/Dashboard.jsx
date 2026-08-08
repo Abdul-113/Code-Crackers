@@ -30,7 +30,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!currentUser) return;
-    const unsub = invoiceService.subscribeInvoices(currentUser.uid || currentUser.email, (data) => {
+    // Firestore stores invoices with `createdBy` = user UID
+    const unsub = invoiceService.subscribeInvoices(currentUser.uid, (data) => {
       setInvoicesList(data);
     });
     return () => unsub();
@@ -43,8 +44,16 @@ export default function Dashboard() {
     navigate('/app/msme?action=upload');
   };
 
-  const availableCapital = invoicesList.filter(i => i.status === 'Funded').reduce((sum, inv) => sum + (Number(inv.invoiceAmount) || 0), 0);
-  const pendingCapital = invoicesList.filter(i => i.status !== 'Funded').reduce((sum, inv) => sum + (Number(inv.invoiceAmount) || 0), 0);
+  // Firestore invoices use `invoiceStatus` and `invoiceAmount` fields
+  const getStatus = (inv) => inv.invoiceStatus || inv.status || '';
+  const getAmount = (inv) => Number(inv.invoiceAmount) || Number(inv.amount) || 0;
+
+  const availableCapital = invoicesList
+    .filter(i => getStatus(i) === 'Funded')
+    .reduce((sum, inv) => sum + getAmount(inv), 0);
+  const pendingCapital = invoicesList
+    .filter(i => getStatus(i) !== 'Funded')
+    .reduce((sum, inv) => sum + getAmount(inv), 0);
 
   return (
     <ContentContainer>
@@ -186,22 +195,22 @@ export default function Dashboard() {
                         {typeof inv.invoiceAmount === 'number' ? formatCurrency(inv.invoiceAmount) : inv.amount}
                       </div>
                       <div className="mt-1">
-                        {inv.status === 'Funded' && (
+                        {(getStatus(inv) === 'Funded' || getStatus(inv) === 'Listed') && (
                           <span className="inline-flex items-center gap-1 text-[10px] font-bold text-success-600 bg-success-50 dark:bg-success-900/20 px-2 py-0.5 rounded-full">
-                            <CheckCircle2 className="h-3 w-3" /> Payout Released
+                            <CheckCircle2 className="h-3 w-3" /> {getStatus(inv) === 'Listed' ? 'Listed in Marketplace' : 'Payout Released'}
                           </span>
                         )}
-                        {inv.status === 'Auction Live' && (
+                        {getStatus(inv) === 'Auction Live' && (
                           <span className="inline-flex items-center gap-1 text-[10px] font-bold text-primary-600 bg-primary-50 dark:bg-primary-900/20 px-2 py-0.5 rounded-full">
                             <Activity className="h-3 w-3 animate-pulse" /> Bidding Live
                           </span>
                         )}
-                        {inv.status === 'Pending' && (
+                        {(getStatus(inv) === 'Pending' || getStatus(inv) === 'PENDING') && (
                           <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-0.5 rounded-full">
                             <ShieldCheck className="h-3 w-3" /> Verification Pending
                           </span>
                         )}
-                        {inv.status === 'Verified' && (
+                        {(getStatus(inv) === 'Verified' || getStatus(inv) === 'VERIFIED' || getStatus(inv) === 'BUYER_APPROVED') && (
                           <span className="inline-flex items-center gap-1 text-[10px] font-bold text-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 px-2 py-0.5 rounded-full">
                             <ShieldCheck className="h-3 w-3" /> Verified
                           </span>

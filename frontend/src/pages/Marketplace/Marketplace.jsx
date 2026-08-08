@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Hexagon, ShieldCheck, Landmark, Key, Banknote, 
@@ -15,7 +16,7 @@ import toast from 'react-hot-toast';
 import { useEscrow } from '@/hooks/useEscrow';
 
 import { marketplaceService } from '@/services/marketplaceService';
-import { useEffect } from 'react';
+import RiskScoreCard from '../MSME/components/RiskScoreCard';
 
 export default function Marketplace() {
   const [invoices, setInvoices] = useState([]);
@@ -23,11 +24,38 @@ export default function Marketplace() {
   const [search, setSearch] = useState('');
   const [selectedIndustry, setSelectedIndustry] = useState('All');
   const [selectedGrade, setSelectedGrade] = useState('All');
+
+
   
   const [drawerInvoice, setDrawerInvoice] = useState(null);
   const [bidInvoice, setBidInvoice]       = useState(null);
   const [bidSuccess, setBidSuccess]       = useState(false);
   const [confirmedTxHash, setConfirmedTxHash] = useState(null);
+
+  // Prevent background scroll on both body and main layout container when modal is open
+  useEffect(() => {
+    const mainEl = document.querySelector('main');
+    if (drawerInvoice || bidInvoice) {
+      document.body.style.overflow = 'hidden';
+      if (mainEl) {
+        mainEl.style.overflow = 'hidden';
+        mainEl.style.pointerEvents = 'none';
+      }
+    } else {
+      document.body.style.overflow = 'unset';
+      if (mainEl) {
+        mainEl.style.overflow = 'auto';
+        mainEl.style.pointerEvents = 'auto';
+      }
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      if (mainEl) {
+        mainEl.style.overflow = 'auto';
+        mainEl.style.pointerEvents = 'auto';
+      }
+    };
+  }, [drawerInvoice, bidInvoice]);
 
   // Form State
   const [bidAmount,     setBidAmount]     = useState('');
@@ -467,22 +495,26 @@ export default function Marketplace() {
       </div>
 
       {/* Invoice Detail Side Drawer */}
-      <AnimatePresence>
-        {drawerInvoice && (
-          <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-sm p-4">
+      {createPortal(
+        <AnimatePresence>
+          {drawerInvoice && (
+          <div 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 sm:p-6 z-[100]"
+            onWheel={(e) => e.stopPropagation()}
+          >
             
             {/* Backdrop close */}
             <div className="absolute inset-0" onClick={() => setDrawerInvoice(null)} />
 
             <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="relative z-10 w-full max-w-lg bg-white dark:bg-dark-card border-l border-gray-150 dark:border-dark-border shadow-2xl h-full flex flex-col justify-between p-6 sm:p-8 overflow-y-auto"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onWheel={(e) => e.stopPropagation()}
+              className="relative z-10 w-full max-w-3xl bg-white dark:bg-dark-card rounded-3xl border border-gray-200 dark:border-dark-border shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden max-h-[88vh]"
             >
-              <div className="space-y-6">
-                <div className="flex justify-between items-center border-b border-gray-100 dark:border-slate-800 pb-4">
+              <div className="flex justify-between items-center border-b border-gray-100 dark:border-slate-800 px-6 sm:px-8 py-5 shrink-0 bg-gray-50/80 dark:bg-slate-900/80">
                   <div>
                     <h3 className="font-display font-bold text-lg text-gray-900 dark:text-white">{drawerInvoice.buyer}</h3>
                     <span className="text-[10px] text-gray-400 font-semibold">{drawerInvoice.id}</span>
@@ -495,6 +527,11 @@ export default function Marketplace() {
                   </button>
                 </div>
 
+              <div 
+                className="overflow-y-auto px-6 sm:px-8 py-6 space-y-8 custom-scrollbar overscroll-contain"
+                style={{ maxHeight: 'calc(88vh - 145px)' }}
+                onWheel={(e) => e.stopPropagation()}
+              >
                 {/* Summary Parameters */}
                 <div className="grid grid-cols-2 gap-4">
                   {[
@@ -506,11 +543,19 @@ export default function Marketplace() {
                     { label: 'Auction status', value: drawerInvoice.status },
                     { label: 'On-chain Repayment History', value: reputationScore !== null ? `${reputationScore}% On-Time` : 'Loading...', color: 'text-blue-500' }
                   ].map((item) => (
-                    <div key={item.label} className="p-3 rounded-xl border border-gray-100 dark:border-slate-800/80 bg-gray-50/50 dark:bg-slate-900/30 text-xs">
+                    <div key={item.label} className="p-3 rounded-xl border border-gray-100 dark:border-slate-800/80 bg-gray-50/50 dark:bg-slate-900/30 text-xs flex flex-col justify-center">
                       <div className="text-[9px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">{item.label}</div>
-                      <div className={`font-bold ${item.color || 'text-gray-800 dark:text-white'}`}>{item.value}</div>
+                      <div className={`font-bold truncate ${item.color || 'text-gray-800 dark:text-white'}`}>{item.value}</div>
                     </div>
                   ))}
+                </div>
+
+                {/* Sovereign Risk Underwriting */}
+                <div className="pt-2">
+                  <RiskScoreCard 
+                    buyerGST={drawerInvoice.buyerGST || ''} 
+                    buyerName={drawerInvoice.buyer} 
+                  />
                 </div>
 
                 {/* Blockchain Proof */}
@@ -559,7 +604,7 @@ export default function Marketplace() {
               </div>
 
               {/* Action Footer */}
-              <div className="border-t border-gray-100 dark:border-slate-800 pt-6 mt-6 flex gap-4">
+              <div className="border-t border-gray-100 dark:border-slate-800 px-6 sm:px-8 py-5 shrink-0 flex gap-4 bg-gray-50/50 dark:bg-slate-900/50">
                 <button 
                   onClick={() => setBidInvoice(drawerInvoice)}
                   disabled={drawerInvoice.status === 'Funded'}
@@ -571,10 +616,13 @@ export default function Marketplace() {
 
             </motion.div>
           </div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
       {/* Bid Modal Dialog */}
+      {createPortal(
       <AnimatePresence>
         {bidInvoice && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
@@ -779,7 +827,9 @@ export default function Marketplace() {
 
           </div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body
+      )}
 
     </ContentContainer>
   );

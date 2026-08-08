@@ -369,8 +369,7 @@ export default function Buyer() {
         (invGst    && invGst === userGST) ||
         (invWallet && invWallet === userWallet) ||
         (userCompany && invBuyer.includes(userCompany)) ||
-        (inv.buyerId && inv.buyerId === currentUser.uid) ||
-        invBuyer.includes('infosys')
+        (inv.buyerId && inv.buyerId === currentUser.uid)
       );
     });
 
