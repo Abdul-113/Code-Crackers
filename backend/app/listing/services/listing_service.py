@@ -72,6 +72,7 @@ class ListingService:
             "invoiceId": invoice_id,
             "listingId": listing_id,
             "buyer": invoice_doc.get("buyerName", "Unknown Buyer"),
+            "buyerGST": invoice_doc.get("buyerGST") or invoice_doc.get("buyer_gst") or "",
             "owner": invoice_doc.get("sellerName", "Unknown Seller"),
             "industry": industry,
             "amount": invoice_doc.get("invoiceAmount", 0.0),

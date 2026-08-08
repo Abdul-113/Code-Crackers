@@ -148,7 +148,7 @@ Desktop.ini
 *.iws
 
 # ─────────────────────────────────────────────
-# MISC
+# MISC & SAMPLE DATA
 # ─────────────────────────────────────────────
 *.bak
 *.tmp
@@ -156,4 +156,12 @@ Desktop.ini
 *.swp
 *.orig
 sample_invoice*.html
+*.pdf
+Sample_Invoice_*
+Sample_*
+backend/generate_*_pdf.py
+backend/audit_*.py
+backend/update_*.py
+backend/scratch_*.py
+
 
