@@ -147,8 +147,26 @@ class FirebaseService:
         self.app = None
         
     def initialize(self):
+        # 1. Check for raw JSON string in environment variables
+        json_env = os.getenv("FIREBASE_CREDENTIALS_JSON") or os.getenv("FIREBASE_SERVICE_ACCOUNT")
+        if json_env:
+            try:
+                cred_dict = json.loads(json_env)
+                if not firebase_admin._apps:
+                    cred = credentials.Certificate(cred_dict)
+                    self.app = firebase_admin.initialize_app(cred)
+                else:
+                    self.app = firebase_admin.get_app()
+                self.db = firestore.client()
+                logger.info("Firebase Admin SDK initialized successfully from environment JSON.")
+                return
+            except Exception as e:
+                logger.warning(f"Could not initialize Firebase from JSON string: {e}")
+
+        # 2. Check candidate file paths
         candidate_paths = [
             os.getenv("FIREBASE_CREDENTIALS_PATH"),
+            "/etc/secrets/firebase-service-account.json",
             "app/config/firebase-service-account.json",
             os.path.join(os.path.dirname(__file__), "../../../app/config/firebase-service-account.json"),
             os.path.join(os.path.dirname(__file__), "../../config/firebase-service-account.json"),
@@ -161,7 +179,7 @@ class FirebaseService:
                 break
         
         if not valid_path:
-            logger.warning("Firebase credentials JSON not found. Launching in local-file Mock Mode (mock_db.json).")
+            logger.warning("Firebase credentials not found. Launching in local-file Mock Mode (mock_db.json).")
             self.db = MockFirestore()
             return
             
@@ -172,7 +190,7 @@ class FirebaseService:
             else:
                 self.app = firebase_admin.get_app()
             self.db = firestore.client()
-            logger.info("Firebase Admin SDK initialized successfully.")
+            logger.info(f"Firebase Admin SDK initialized successfully from {valid_path}.")
         except Exception as e:
             logger.error(f"Failed to initialize Firebase Admin SDK: {e}. Falling back to Mock mode.")
             self.db = MockFirestore()
